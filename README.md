@@ -54,6 +54,6 @@ O aplicativo considera o valor total gasto em refrigerantes.
 <p><h3>Valor Total dos Pães(R$): 10 e do Refrigerante(R$): 6</h3></p>
 <p><h4>#adicionar o valor dos pães que vai ser dividido perante a quantidade de pães que cada pessoa comeu e o valor do refrigerante que vai ser dividido igualmente pelas pessoas e clicar em "Calcular Valor Total" para ver o resultado da lista</h4></p>
 
-<img src="img/Ex.CalculoValor.jpg" style="border-radius: 100px">
+<img src="img/Ex.CalculoValor.jpg">
 
 # Divirta-se!!
