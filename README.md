@@ -34,26 +34,26 @@ O aplicativo considera o valor total gasto em refrigerantes.
 <p><h3>Nome da Pessoa: Daniel</h3></p>
 <p><h3>Quantidade de Pães Consumidos: 3</h3></p>
 <p><h4>#Adicione o nome e a quantidade de pães que a pessoa comeu, clicar em "Adicionar Consumo" e adicionar quantas pessoas você quiser na lista.</h4></p>
-<img src="img/Ex.Daniel.jpg">
+<img src="img/Ex.Daniel.jpg"width= "300px">
 
 <h1></h1>
 
 <p><h3>Nome da Pessoa: Pedro</h3></p>
 <p><h3>Quantidade de Pães Consumidos: 1</h3></p>
-<img src="img/Ex.Pedro.jpg">
+<img src="img/Ex.Pedro.jpg"width= "300px">
 
 <h1></h1>
 
 <p><h3>Nome da Pessoa: Francisco</h3></p>
 <p><h3>Quantidade de Pães Consumidos: 1</h3></p>
 <h4>#Caso não queira mais adicionar pessoas na lista, ir para as opções de baixo:</h4>
-<img src="img/Ex.Francisco.jpg">
+<img src="img/Ex.Francisco.jpg"width= "300px">
 
 <h1></h1>
 
 <p><h3>Valor Total dos Pães(R$): 10 e do Refrigerante(R$): 6</h3></p>
 <p><h4>#adicionar o valor dos pães que vai ser dividido perante a quantidade de pães que cada pessoa comeu e o valor do refrigerante que vai ser dividido igualmente pelas pessoas e clicar em "Calcular Valor Total" para ver o resultado da lista</h4></p>
 
-<img src="img/Ex.CalculoValor.jpg">
+<img src="img/Ex.CalculoValor.jpg" width= "500px">
 
 # Divirta-se!!
