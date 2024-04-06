@@ -28,24 +28,5 @@ Calcular valor total: Digite o valor total dos pães e dos refrigerantes. Clique
 O aplicativo considera que todos os pães têm o mesmo valor.
 O aplicativo considera o valor total gasto em refrigerantes.
 
-# Exemplo de uso:
-
-Pessoa 1:
-
-Nome: João
-Pães: 3
-Pessoa 2:
-
-Nome: Maria
-Pães: 2
-Valor total dos pães: R$ 10,00
-
-Valor total dos refrigerantes: R$ 8,00
-
-Resultado:
-
-João: R$ 6,50
-Maria: R$ 5,50
-
 
 # Divirta-se!!
