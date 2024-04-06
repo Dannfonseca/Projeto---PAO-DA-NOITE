@@ -37,8 +37,6 @@ O aplicativo considera o valor total gasto em refrigerantes.
 
 <img src="img/Ex.Daniel.jpg">
 
-<p><h4>#</h4></p>
-
 <p><h3>Nome da Pessoa: Pedro</h3></p>
 <p><h3>Quantidade de Pães Consumidos: 1</h3></p>
 
