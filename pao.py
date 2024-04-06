@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from PIL import Image, ImageTk
 
 # Lista para armazenar as quantidades de pães consumidos por pessoa
 consumo_paes = []
@@ -54,36 +55,52 @@ def calcular_valor_total():
 root = tk.Tk()
 root.title("Calculadora de Lanche da Noite")
 
+# Carregando a primeira imagem e convertendo para um formato tkinter
+imagem1 = Image.open("pao.jpeg")
+imagem1.thumbnail((150, 150))  # Redimensionando a imagem
+imagem1 = ImageTk.PhotoImage(imagem1)
+
+# Carregando a segunda imagem e convertendo para um formato tkinter
+imagem2 = Image.open("coca.png")
+imagem2.thumbnail((150, 150))  # Redimensionando a imagem
+imagem2 = ImageTk.PhotoImage(imagem2)
+
 # Criando e posicionando os widgets
+label_imagem1 = tk.Label(root, image=imagem1)
+label_imagem1.grid(row=0, column=0, padx=5, pady=5)
+
+label_imagem2 = tk.Label(root, image=imagem2)
+label_imagem2.grid(row=0, column=1, padx=5, pady=5)
+
 label_pessoa = tk.Label(root, text="Nome da Pessoa:")
-label_pessoa.grid(row=0, column=0, padx=10, pady=5)
+label_pessoa.grid(row=1, column=0, padx=10, pady=5)
 
 entry_pessoa = tk.Entry(root)
-entry_pessoa.grid(row=0, column=1, padx=10, pady=5)
+entry_pessoa.grid(row=1, column=1, padx=10, pady=5)
 
 label_paes = tk.Label(root, text="Quantidade de Pães Consumidos:")
-label_paes.grid(row=1, column=0, padx=10, pady=5)
+label_paes.grid(row=2, column=0, padx=10, pady=5)
 
 entry_paes = tk.Entry(root)
-entry_paes.grid(row=1, column=1, padx=10, pady=5)
+entry_paes.grid(row=2, column=1, padx=10, pady=5)
 
 btn_adicionar = tk.Button(root, text="Adicionar Consumo", command=adicionar_consumo)
-btn_adicionar.grid(row=2, columnspan=2, padx=10, pady=10)
+btn_adicionar.grid(row=3, columnspan=2, padx=10, pady=10)
 
 label_valor_total_paes = tk.Label(root, text="Valor Total dos Pães (R$):")
-label_valor_total_paes.grid(row=3, column=0, padx=10, pady=5)
+label_valor_total_paes.grid(row=4, column=0, padx=10, pady=5)
 
 entry_valor_total_paes = tk.Entry(root)
-entry_valor_total_paes.grid(row=3, column=1, padx=10, pady=5)
+entry_valor_total_paes.grid(row=4, column=1, padx=10, pady=5)
 
 label_valor_total_refrigerantes = tk.Label(root, text="Valor Total dos Refrigerantes (R$):")
-label_valor_total_refrigerantes.grid(row=4, column=0, padx=10, pady=5)
+label_valor_total_refrigerantes.grid(row=5, column=0, padx=10, pady=5)
 
 entry_valor_total_refrigerantes = tk.Entry(root)
-entry_valor_total_refrigerantes.grid(row=4, column=1, padx=10, pady=5)
+entry_valor_total_refrigerantes.grid(row=5, column=1, padx=10, pady=5)
 
 btn_calcular = tk.Button(root, text="Calcular Valor Total", command=calcular_valor_total)
-btn_calcular.grid(row=5, columnspan=2, padx=10, pady=10)
+btn_calcular.grid(row=6, columnspan=2, padx=10, pady=10)
 
 # Iniciando o loop principal da janela
 root.mainloop()
