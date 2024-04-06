@@ -49,7 +49,7 @@ O aplicativo considera o valor total gasto em refrigerantes.
 
 <img src="img/Ex.Francisco.jpg">
 
-#Caso não queira mais adicionar pessoas, ir para as opções de baixo:
+#Caso não queira mais adicionar pessoas na lista, ir para as opções de baixo:
 
 <p>Valor Total dos Pães(R$): 10</p>
 <p>#adicionar o valor dos pães que vai ser dividido perante a quantidade de pães que cada pessoa comeu.</p>
