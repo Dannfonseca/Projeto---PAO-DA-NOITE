@@ -56,6 +56,6 @@ Valor Total dos Pães(R$): 10
 Valor Total dos Refrigerantes(R$): 6
 #adicionar o valor do refrigerante que vai ser dividido igualmente pelas pessoas e clicar em "Calcular Valor Total".
 
-<img src="img/Ex.Calculo.Valor.jpg"
+<img src="img/Ex.CalculoValor.jpg"
 
 # Divirta-se!!
