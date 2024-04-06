@@ -51,7 +51,7 @@ Quantidade de Pães Consumidos: 1
 Caso não queira mais adicionar pessoas, ir para as opções de baixo:
 
 Valor Total dos Pães(R$): 10
-#adicionar o valor dos pães que vai ser dividido perante a quantidade de pães que cada pessoa comeu.
+<p>#adicionar o valor dos pães que vai ser dividido perante a quantidade de pães que cada pessoa comeu.</p>
 
 Valor Total dos Refrigerantes(R$): 6
 #adicionar o valor do refrigerante que vai ser dividido igualmente pelas pessoas e clicar em "Calcular Valor Total".
