@@ -26,6 +26,7 @@ Calcular valor total: Digite o valor total dos pães e dos refrigerantes. Clique
 # Observações:
 
 O aplicativo considera que todos os pães têm o mesmo valor.
+
 O aplicativo considera o valor total gasto em refrigerantes.
 
 
