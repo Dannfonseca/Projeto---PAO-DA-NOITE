@@ -39,7 +39,7 @@ O aplicativo considera o valor total gasto em refrigerantes.
 
 #clicar em "Adicionar Consumo" e adicionar quantas pessoas você quiser na lista:
 
-<p>Nome da Pessoa: Pedro</p>
+<p><h1>Nome da Pessoa: Pedro</h1></p>
 <p>Quantidade de Pães Consumidos: 1</p>
 
 <img src="img/Ex.Pedro.jpg">
