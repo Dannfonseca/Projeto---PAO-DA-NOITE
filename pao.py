@@ -115,10 +115,35 @@ def exibir_lista_pessoas():
         janela_pessoas.title("Lista de Pessoas")
         exibir_lista_pessoas.janela_pessoas = janela_pessoas
 
-    # Criar e exibir a lista de pessoas
+    # Adicionar botões para alterar e excluir pessoas e alterar quantidade de pães
     for i, (pessoa, paes_consumidos) in enumerate(consumo_paes):
         label_pessoa = tk.Label(janela_pessoas, text=f"Pessoa {i+1}: {pessoa} - Pães Consumidos: {paes_consumidos}")
-        label_pessoa.pack()
+        label_pessoa.grid(row=i, column=0, padx=10, pady=5)
+
+        # Botão para alterar quantidade de pães
+        btn_alterar_paes = tk.Button(janela_pessoas, text="Alterar Pães", command=lambda pessoa=pessoa: alterar_paes(pessoa))
+        btn_alterar_paes.grid(row=i, column=1, padx=5, pady=5)
+
+        # Botão para excluir pessoa
+        btn_excluir_pessoa = tk.Button(janela_pessoas, text="Excluir Pessoa", command=lambda pessoa=pessoa: excluir_pessoa(pessoa))
+        btn_excluir_pessoa.grid(row=i, column=2, padx=5, pady=5)
+
+def alterar_paes(pessoa):
+    # Encontrar o índice da pessoa na lista de consumo_paes
+    index = next((i for i, (p, _) in enumerate(consumo_paes) if p == pessoa), None)
+    if index is not None:
+        novo_valor = tk.simpledialog.askinteger("Alterar Pães", f"Novo valor de pães consumidos para {pessoa}:",
+                                                initialvalue=consumo_paes[index][1])
+        if novo_valor is not None:
+            consumo_paes[index] = (pessoa, novo_valor)
+            # Atualizar a exibição da lista de pessoas
+            exibir_lista_pessoas()
+
+def excluir_pessoa(pessoa):
+    # Remover a pessoa da lista de consumo_paes
+    consumo_paes[:] = [p for p in consumo_paes if p[0] != pessoa]
+    # Atualizar a exibição da lista de pessoas
+    exibir_lista_pessoas()
 
 # Adicionar um botão para exibir a lista de pessoas
 btn_exibir_lista_pessoas = tk.Button(root, text="Exibir Lista de Pessoas", command=exibir_lista_pessoas)
