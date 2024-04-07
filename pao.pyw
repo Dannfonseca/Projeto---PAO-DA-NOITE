@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import simpledialog
 from PIL import Image, ImageTk # type: ignore
 
 # Lista para armazenar as quantidades de pães consumidos por pessoa
