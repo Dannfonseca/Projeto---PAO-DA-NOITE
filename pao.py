@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk # type: ignore
 
 # Lista para armazenar as quantidades de pães consumidos por pessoa
 consumo_paes = []
@@ -56,12 +56,12 @@ root = tk.Tk()
 root.title("Calculadora de Lanche da Noite")
 
 # Carregando a primeira imagem e convertendo para um formato tkinter
-imagem1 = Image.open("pao.jpeg")
+imagem1 = Image.open("./img/pao.jpeg")
 imagem1.thumbnail((150, 150))  # Redimensionando a imagem
 imagem1 = ImageTk.PhotoImage(imagem1)
 
 # Carregando a segunda imagem e convertendo para um formato tkinter
-imagem2 = Image.open("coca.png")
+imagem2 = Image.open("./img/coca.png")
 imagem2.thumbnail((150, 150))  # Redimensionando a imagem
 imagem2 = ImageTk.PhotoImage(imagem2)
 
@@ -102,5 +102,11 @@ entry_valor_total_refrigerantes.grid(row=5, column=1, padx=10, pady=5)
 btn_calcular = tk.Button(root, text="Calcular Valor Total", command=calcular_valor_total)
 btn_calcular.grid(row=6, columnspan=2, padx=10, pady=10)
 
+#Janela Pessoas
+janelasPessoas = tk.Tk()
+janelasPessoas.title("Pessoas")
+
+
 # Iniciando o loop principal da janela
 root.mainloop()
+janelasPessoas.mainloop()
