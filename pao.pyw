@@ -79,6 +79,7 @@ def centralizar_janela2(janela):
 
 # Criando a janela principal
 root = tk.Tk()
+root.iconbitmap("./img/sandwich.ico")
 root.title("Calculadora de Lanche da Noite")
 
 # Centralizando a janela principal
@@ -141,6 +142,8 @@ def exibir_lista_pessoas():
     else:
         # Criar uma nova janela se não estiver aberta
         janela_pessoas = tk.Toplevel(root)
+        janela_pessoas.iconbitmap("./img/sandwich.ico")
+
         centralizar_janela2(janela_pessoas)
         janela_pessoas.title("Lista de Pessoas")
         exibir_lista_pessoas.janela_pessoas = janela_pessoas

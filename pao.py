@@ -79,6 +79,7 @@ def centralizar_janela2(janela):
 
 # Criando a janela principal
 root = tk.Tk()
+root.iconbitmap("./img/sandwich.ico")
 root.title("Calculadora de Lanche da Noite")
 
 # Centralizando a janela principal
@@ -142,6 +143,8 @@ def exibir_lista_pessoas():
         # Criar uma nova janela se não estiver aberta
         janela_pessoas = tk.Toplevel(root)
         centralizar_janela2(janela_pessoas)
+        janela_pessoas.iconbitmap("./img/sandwich.ico")
+
         janela_pessoas.title("Lista de Pessoas")
         exibir_lista_pessoas.janela_pessoas = janela_pessoas
 
@@ -164,8 +167,11 @@ def alterar_paes(pessoa):
     if index is not None:
         novo_valor = tk.simpledialog.askinteger("Alterar Pães", f"Novo valor de pães consumidos para {pessoa}:",
                                                 initialvalue=consumo_paes[index][1])
+        
         if novo_valor is not None:
             consumo_paes[index] = (pessoa, novo_valor)
+            alterar_paes.iconbitmap("./img/sandwich.ico")
+
             # Atualizar a exibição da lista de pessoas
             exibir_lista_pessoas()
 
