@@ -51,9 +51,24 @@ def calcular_valor_total():
     except ValueError:
         messagebox.showerror("Erro", "Por favor, insira valores válidos.")
 
+def centralizar_janela(janela):
+    largura_janela = janela.winfo_reqwidth()
+    altura_janela = janela.winfo_reqheight()
+
+    largura_tela = janela.winfo_screenwidth()
+    altura_tela = janela.winfo_screenheight()
+
+    posicao_x = (largura_tela - largura_janela) // 2
+    posicao_y = (altura_tela - altura_janela) // 3
+
+    janela.geometry(f"+{posicao_x}+{posicao_y}")
+
 # Criando a janela principal
 root = tk.Tk()
 root.title("Calculadora de Lanche da Noite")
+
+# Centralizando a janela principal
+centralizar_janela(root)
 
 # Carregando a primeira imagem e convertendo para um formato tkinter
 imagem1 = Image.open("./img/pao.jpeg")
