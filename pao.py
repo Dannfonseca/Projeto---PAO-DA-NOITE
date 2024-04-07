@@ -63,6 +63,19 @@ def centralizar_janela(janela):
 
     janela.geometry(f"+{posicao_x}+{posicao_y}")
 
+
+def centralizar_janela2(janela):
+    largura_janela = janela.winfo_reqwidth()
+    altura_janela = janela.winfo_reqheight()
+
+    largura_tela = janela.winfo_screenwidth()
+    altura_tela = janela.winfo_screenheight()
+
+    posicao_x = (largura_tela - largura_janela) // 3
+    posicao_y = (altura_tela - altura_janela) // 3
+
+    janela.geometry(f"+{posicao_x}+{posicao_y}")
+
 # Criando a janela principal
 root = tk.Tk()
 root.title("Calculadora de Lanche da Noite")
@@ -127,6 +140,7 @@ def exibir_lista_pessoas():
     else:
         # Criar uma nova janela se não estiver aberta
         janela_pessoas = tk.Toplevel(root)
+        centralizar_janela2(janela_pessoas)
         janela_pessoas.title("Lista de Pessoas")
         exibir_lista_pessoas.janela_pessoas = janela_pessoas
 
@@ -159,6 +173,7 @@ def excluir_pessoa(pessoa):
     consumo_paes[:] = [p for p in consumo_paes if p[0] != pessoa]
     # Atualizar a exibição da lista de pessoas
     exibir_lista_pessoas()
+
 
 # Adicionar um botão para exibir a lista de pessoas
 btn_exibir_lista_pessoas = tk.Button(root, text="Exibir Lista de Pessoas", command=exibir_lista_pessoas)
