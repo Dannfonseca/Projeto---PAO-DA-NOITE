@@ -102,11 +102,28 @@ entry_valor_total_refrigerantes.grid(row=5, column=1, padx=10, pady=5)
 btn_calcular = tk.Button(root, text="Calcular Valor Total", command=calcular_valor_total)
 btn_calcular.grid(row=6, columnspan=2, padx=10, pady=10)
 
-#Janela Pessoas
-janelasPessoas = tk.Tk()
-janelasPessoas.title("Pessoas")
+def exibir_lista_pessoas():
+    # Verificar se a janela já está aberta
+    if hasattr(exibir_lista_pessoas, 'janela_pessoas') and exibir_lista_pessoas.janela_pessoas.winfo_exists():
+        janela_pessoas = exibir_lista_pessoas.janela_pessoas
+        # Limpar a janela antes de atualizar
+        for widget in janela_pessoas.winfo_children():
+            widget.destroy()
+    else:
+        # Criar uma nova janela se não estiver aberta
+        janela_pessoas = tk.Toplevel(root)
+        janela_pessoas.title("Lista de Pessoas")
+        exibir_lista_pessoas.janela_pessoas = janela_pessoas
+
+    # Criar e exibir a lista de pessoas
+    for i, (pessoa, paes_consumidos) in enumerate(consumo_paes):
+        label_pessoa = tk.Label(janela_pessoas, text=f"Pessoa {i+1}: {pessoa} - Pães Consumidos: {paes_consumidos}")
+        label_pessoa.pack()
+
+# Adicionar um botão para exibir a lista de pessoas
+btn_exibir_lista_pessoas = tk.Button(root, text="Exibir Lista de Pessoas", command=exibir_lista_pessoas)
+btn_exibir_lista_pessoas.grid(row=7, columnspan=2, padx=10, pady=10)
 
 
 # Iniciando o loop principal da janela
 root.mainloop()
-janelasPessoas.mainloop()
