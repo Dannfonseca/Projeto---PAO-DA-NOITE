@@ -1,7 +1,6 @@
 import tkinter as tk
-from tkinter import messagebox
-from tkinter import simpledialog
-from PIL import Image, ImageTk # type: ignore
+from tkinter import messagebox, simpledialog
+from PIL import Image, ImageTk
 
 # Lista para armazenar as quantidades de pães consumidos por pessoa
 consumo_paes = []
@@ -63,7 +62,6 @@ def centralizar_janela(janela):
     posicao_y = (altura_tela - altura_janela) // 3
 
     janela.geometry(f"+{posicao_x}+{posicao_y}")
-
 
 def centralizar_janela2(janela):
     largura_janela = janela.winfo_reqwidth()
@@ -165,13 +163,13 @@ def alterar_paes(pessoa):
     # Encontrar o índice da pessoa na lista de consumo_paes
     index = next((i for i, (p, _) in enumerate(consumo_paes) if p == pessoa), None)
     if index is not None:
-        novo_valor = tk.simpledialog.askinteger("Alterar Pães", f"Novo valor de pães consumidos para {pessoa}:",
+        novo_valor = simpledialog.askinteger("Alterar Pães", f"Novo valor de pães consumidos para {pessoa}:",
                                                 initialvalue=consumo_paes[index][1])
         
         if novo_valor is not None:
             consumo_paes[index] = (pessoa, novo_valor)
-            alterar_paes.iconbitmap("./img/sandwich.ico")
-
+            # Recalcular o valor total
+            calcular_valor_total()
             # Atualizar a exibição da lista de pessoas
             exibir_lista_pessoas()
 
@@ -181,11 +179,9 @@ def excluir_pessoa(pessoa):
     # Atualizar a exibição da lista de pessoas
     exibir_lista_pessoas()
 
-
 # Adicionar um botão para exibir a lista de pessoas
 btn_exibir_lista_pessoas = tk.Button(root, text="Exibir Lista de Pessoas", command=exibir_lista_pessoas)
 btn_exibir_lista_pessoas.grid(row=7, columnspan=2, padx=10, pady=10)
-
 
 # Iniciando o loop principal da janela
 root.mainloop()
