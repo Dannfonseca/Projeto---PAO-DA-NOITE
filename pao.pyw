@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox, simpledialog
 from PIL import Image, ImageTk
+from datetime import datetime
 
 # Lista para armazenar as quantidades de pães consumidos por pessoa
 consumo_paes = []
@@ -14,8 +15,8 @@ def adicionar_consumo():
         # Adicionando o consumo à lista
         consumo_paes.append((pessoa, paes_consumidos))
 
-        # Atualizar o total de pães consumidos na label
-        atualizar_total_paes()
+        # Atualizar o total de pães consumidos e o total de pessoas na lista
+        atualizar_total_paes_pessoas()
 
         # Limpar os campos de entrada
         entry_pessoa.delete(0, tk.END)
@@ -49,7 +50,17 @@ def calcular_valor_total():
         for pessoa, valor in valor_a_pagar.items():
             resultado += f"{pessoa}: R${valor:.2f}\n"
 
+        # Adicionar o PIX e a data ao resultado
+        pix = entry_pix.get()
+        resultado += f"\nPIX: {pix}\n"
+        resultado += f"Data: {datetime.now().strftime('%d/%m/%Y')}\n"
+
+        # Mostrar o resultado em um messagebox
         messagebox.showinfo("Resultados", resultado)
+
+        # Salvar o resultado em um arquivo de texto
+        with open("resultado_lanche.txt", "w") as file:
+            file.write(resultado)
 
     except ValueError:
         messagebox.showerror("Erro", "Por favor, insira valores válidos.")
@@ -78,11 +89,15 @@ def centralizar_janela2(janela):
 
     janela.geometry(f"+{posicao_x}+{posicao_y}")
 
-def atualizar_total_paes():
+def atualizar_total_paes_pessoas():
     # Calculando o total de pães consumidos
     total_paes = sum(qtd_paes for pessoa, qtd_paes in consumo_paes)
     # Atualizando a label com o total de pães
     label_total_paes.config(text=f"Total de Pães Consumidos: {total_paes}")
+    # Calculando o total de pessoas na lista
+    total_pessoas = len(consumo_paes)
+    # Atualizando a label com o total de pessoas
+    label_total_pessoas.config(text=f"Total de Pessoas: {total_pessoas}")
 
 # Criando a janela principal
 root = tk.Tk()
@@ -136,12 +151,23 @@ label_valor_total_refrigerantes.grid(row=5, column=0, padx=10, pady=5)
 entry_valor_total_refrigerantes = tk.Entry(root)
 entry_valor_total_refrigerantes.grid(row=5, column=1, padx=10, pady=5)
 
+# Adicionando um campo para o PIX
+label_pix = tk.Label(root, text="PIX da Pessoa:")
+label_pix.grid(row=6, column=0, padx=10, pady=5)
+
+entry_pix = tk.Entry(root)
+entry_pix.grid(row=6, column=1, padx=10, pady=5)
+
 btn_calcular = tk.Button(root, text="Calcular Valor Total", command=calcular_valor_total)
-btn_calcular.grid(row=6, columnspan=2, padx=10, pady=10)
+btn_calcular.grid(row=7, columnspan=2, padx=10, pady=10)
 
 # Label para exibir o total de pães consumidos
 label_total_paes = tk.Label(root, text="Total de Pães Consumidos: 0")
-label_total_paes.grid(row=7, columnspan=2, padx=10, pady=5)
+label_total_paes.grid(row=8, columnspan=2, padx=10, pady=5)
+
+# Label para exibir o total de pessoas na lista
+label_total_pessoas = tk.Label(root, text="Total de Pessoas: 0")
+label_total_pessoas.grid(row=9, columnspan=2, padx=10, pady=5)
 
 def exibir_lista_pessoas():
     # Verificar se a janela já está aberta
@@ -194,7 +220,7 @@ def excluir_pessoa(pessoa):
 
 # Adicionar um botão para exibir a lista de pessoas
 btn_exibir_lista_pessoas = tk.Button(root, text="Exibir Lista de Pessoas", command=exibir_lista_pessoas)
-btn_exibir_lista_pessoas.grid(row=8, columnspan=2, padx=10, pady=10)
+btn_exibir_lista_pessoas.grid(row=10, columnspan=2, padx=10, pady=10)
 
 # Iniciando o loop principal da janela
 root.mainloop()
