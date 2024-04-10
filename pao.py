@@ -55,11 +55,14 @@ def calcular_valor_total():
         resultado += f"\nPIX: {pix}\n"
         resultado += f"Data: {datetime.now().strftime('%d/%m/%Y')}\n"
 
+        # Adicionar linha de separação entre os resultados
+        resultado += "\n---------------------------------------\n"
+
         # Mostrar o resultado em um messagebox
         messagebox.showinfo("Resultados", resultado)
 
         # Salvar o resultado em um arquivo de texto
-        with open("resultado_lanche.txt", "w") as file:
+        with open("resultado_lanche.txt", "a") as file:  # 'a' para abrir o arquivo em modo de adição (append)
             file.write(resultado)
 
     except ValueError:
