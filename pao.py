@@ -58,10 +58,13 @@ def calcular_valor_total():
             valor_total_por_pessoa = valor_por_pessoa_paes + (valor_total_refrigerantes / len(consumo_paes))
             valor_a_pagar[pessoa] = valor_total_por_pessoa
 
+        # Ordenar os resultados pelo valor a pagar
+        resultados_ordenados = sorted(valor_a_pagar.items(), key=lambda item: item[1])
+
         # Exibindo o resultado
         resultado = "Valor a pagar por pessoa:\n"
-        for pessoa, valor in valor_a_pagar.items():
-            resultado += f"{pessoa}: R${valor:.2f}\n"
+        for pessoa, valor in resultados_ordenados:
+            resultado += f"R$ {valor:.2f} : {pessoa}\n"
 
         # Adicionar o PIX e a data ao resultado
         pix = entry_pix.get()

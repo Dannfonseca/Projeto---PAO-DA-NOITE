@@ -1,10 +1,23 @@
+import os
 import tkinter as tk
 from tkinter import messagebox, simpledialog
 from PIL import Image, ImageTk
 from datetime import datetime
 
+# Obtendo o diretório do script em execução
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+# Diretório onde as imagens estão localizadas
+IMG_DIR = os.path.join(SCRIPT_DIR, "IMG")
+
 # Lista para armazenar as quantidades de pães consumidos por pessoa
 consumo_paes = []
+
+# Função para carregar uma imagem do diretório IMG
+def carregar_imagem(nome_arquivo):
+    caminho_imagem = os.path.join(IMG_DIR, nome_arquivo)
+    imagem = Image.open(caminho_imagem)
+    imagem.thumbnail((150, 150))  # Redimensionando a imagem
+    return ImageTk.PhotoImage(imagem)
 
 def adicionar_consumo():
     try:
@@ -45,10 +58,13 @@ def calcular_valor_total():
             valor_total_por_pessoa = valor_por_pessoa_paes + (valor_total_refrigerantes / len(consumo_paes))
             valor_a_pagar[pessoa] = valor_total_por_pessoa
 
+        # Ordenar os resultados pelo valor a pagar
+        resultados_ordenados = sorted(valor_a_pagar.items(), key=lambda item: item[1])
+
         # Exibindo o resultado
         resultado = "Valor a pagar por pessoa:\n"
-        for pessoa, valor in valor_a_pagar.items():
-            resultado += f"{pessoa}: R${valor:.2f}\n"
+        for pessoa, valor in resultados_ordenados:
+            resultado += f"R$ {valor:.2f} : {pessoa}\n"
 
         # Adicionar o PIX e a data ao resultado
         pix = entry_pix.get()
@@ -104,21 +120,17 @@ def atualizar_total_paes_pessoas():
 
 # Criando a janela principal
 root = tk.Tk()
-root.iconbitmap("./img/sandwich.ico")
+root.iconbitmap(os.path.join(SCRIPT_DIR, "img", "sandwich.ico"))
 root.title("Calculadora de Lanche da Noite")
 
 # Centralizando a janela principal
 centralizar_janela(root)
 
 # Carregando a primeira imagem e convertendo para um formato tkinter
-imagem1 = Image.open("./img/pao.jpeg")
-imagem1.thumbnail((150, 150))  # Redimensionando a imagem
-imagem1 = ImageTk.PhotoImage(imagem1)
+imagem1 = carregar_imagem("pao.jpeg")
 
 # Carregando a segunda imagem e convertendo para um formato tkinter
-imagem2 = Image.open("./img/coca.png")
-imagem2.thumbnail((150, 150))  # Redimensionando a imagem
-imagem2 = ImageTk.PhotoImage(imagem2)
+imagem2 = carregar_imagem("coca.png")
 
 # Criando e posicionando os widgets
 label_imagem1 = tk.Label(root, image=imagem1)
@@ -183,7 +195,7 @@ def exibir_lista_pessoas():
         # Criar uma nova janela se não estiver aberta
         janela_pessoas = tk.Toplevel(root)
         centralizar_janela2(janela_pessoas)
-        janela_pessoas.iconbitmap("./img/sandwich.ico")
+        janela_pessoas.iconbitmap(os.path.join(SCRIPT_DIR, "img", "sandwich.ico"))
 
         janela_pessoas.title("Lista de Pessoas")
         exibir_lista_pessoas.janela_pessoas = janela_pessoas
