@@ -3,11 +3,27 @@ import tkinter as tk
 from tkinter import messagebox, simpledialog
 from PIL import Image, ImageTk
 from datetime import datetime
+import sqlite3
 
 # Obtendo o diretório do script em execução
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 # Diretório onde as imagens estão localizadas
 IMG_DIR = os.path.join(SCRIPT_DIR, "IMG")
+
+# Conexão com o banco de dados SQLite
+conn = sqlite3.connect(os.path.join(SCRIPT_DIR, "dados_lanche.db"))
+cursor = conn.cursor()
+
+# Verificar se a tabela já existe, caso contrário, criá-la
+cursor.execute('''CREATE TABLE IF NOT EXISTS consumo_lanche (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    pessoa TEXT NOT NULL,
+                    paes_consumidos INTEGER NOT NULL,
+                    pix TEXT,
+                    data TEXT,
+                    valor_total NUMERIC
+                  )''')
+conn.commit()
 
 # Lista para armazenar as quantidades de pães consumidos por pessoa
 consumo_paes = []
@@ -22,7 +38,7 @@ def carregar_imagem(nome_arquivo):
 def adicionar_consumo():
     try:
         # Obtendo os valores dos widgets de entrada
-        pessoa = entry_pessoa.get()
+        pessoa = entry_pessoa.get().capitalize()
         paes_consumidos = int(entry_paes.get())
 
         # Adicionando o consumo à lista
@@ -80,6 +96,14 @@ def calcular_valor_total():
         # Salvar o resultado em um arquivo de texto
         with open("resultado_lanche.txt", "a") as file:  # 'a' para abrir o arquivo em modo de adição (append)
             file.write(resultado)
+
+        # Inserir dados no banco de dados SQLite
+        for pessoa, qtd_paes in consumo_paes:
+            data = datetime.now().strftime('%Y-%m-%d')
+            valor_total_pessoa = round(valor_a_pagar[pessoa], 2)  # Arredondar para 2 casas decimais
+            cursor.execute("INSERT INTO consumo_lanche (pessoa, paes_consumidos, pix, data, valor_total) VALUES (?, ?, ?, ?, ?)",
+                           (pessoa, qtd_paes, pix, data, valor_total_pessoa))
+        conn.commit()
 
     except ValueError:
         messagebox.showerror("Erro", "Por favor, insira valores válidos.")
@@ -239,3 +263,6 @@ btn_exibir_lista_pessoas.grid(row=10, columnspan=2, padx=10, pady=10)
 
 # Iniciando o loop principal da janela
 root.mainloop()
+
+# Fechar a conexão com o banco de dados SQLite ao fechar a aplicação
+conn.close()
