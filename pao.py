@@ -4,6 +4,8 @@ from tkinter import messagebox, simpledialog
 from PIL import Image, ImageTk
 from datetime import datetime
 import sqlite3
+import csv
+import re
 
 # Obtendo o diretório do script em execução
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -39,7 +41,11 @@ def adicionar_consumo():
     try:
         # Obtendo os valores dos widgets de entrada
         pessoa = entry_pessoa.get().capitalize()
+        if not re.match("^[A-Za-zÀ-ÖØ-öø-ÿ]+$", pessoa):
+            raise ValueError("Nome da pessoa deve conter apenas letras do alfabeto, incluindo caracteres acentuados")
         paes_consumidos = int(entry_paes.get())
+        if paes_consumidos < 0:
+            raise ValueError("Quantidade de pães consumidos não pode ser negativa")
 
         # Adicionando o consumo à lista
         consumo_paes.append((pessoa, paes_consumidos))
@@ -51,8 +57,9 @@ def adicionar_consumo():
         entry_pessoa.delete(0, tk.END)
         entry_paes.delete(0, tk.END)
 
-    except ValueError:
-        messagebox.showerror("Erro", "Por favor, insira valores válidos.")
+    except ValueError as e:
+        messagebox.showerror("Erro", str(e))
+
 
 def calcular_valor_total():
     try:
@@ -97,6 +104,23 @@ def calcular_valor_total():
         with open("resultado_lanche.txt", "a") as file:  # 'a' para abrir o arquivo em modo de adição (append)
             file.write(resultado)
 
+        
+        # Verificar se o arquivo CSV existe e está vazio
+        if not os.path.exists("resultado_lanche.csv") or os.stat("resultado_lanche.csv").st_size == 0:
+        # Caso o arquivo não exista ou esteja vazio, escrever o cabeçalho
+            with open("resultado_lanche.csv", "w", newline="") as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(["Pessoa", "Pães Consumidos", "Pix", "Data", "Valor Total"])
+
+        # Salvar o resultado em um arquivo CSV
+        with open("resultado_lanche.csv", "a", newline="") as csvfile:
+            writer = csv.writer(csvfile)
+            for pessoa, valor in resultados_ordenados:
+                data_atual = datetime.now().strftime('%d/%m/%Y')
+                qtd_paes_pessoa = next(qtd_paes for nome, qtd_paes in consumo_paes if nome == pessoa)
+                writer.writerow([pessoa, qtd_paes_pessoa, pix, data_atual, f"R$ {valor:.2f}"])
+
+
         # Inserir dados no banco de dados SQLite
         for pessoa, qtd_paes in consumo_paes:
             data = datetime.now().strftime('%Y-%m-%d')
@@ -105,8 +129,8 @@ def calcular_valor_total():
                            (pessoa, qtd_paes, pix, data, valor_total_pessoa))
         conn.commit()
 
-    except ValueError:
-        messagebox.showerror("Erro", "Por favor, insira valores válidos.")
+    except ValueError as e:
+        messagebox.showerror("Erro", str(e))
 
 def centralizar_janela(janela):
     largura_janela = janela.winfo_reqwidth()
