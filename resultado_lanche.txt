@@ -1,0 +1,17 @@
+Valor a pagar por pessoa:
+R$ 3.52 : Felipe
+R$ 3.52 : Delson
+R$ 3.52 : Vinicius
+R$ 3.52 : Marlon
+R$ 3.52 : Paulo
+R$ 5.34 : Francisco
+R$ 5.34 : Leticia
+R$ 5.34 : Pedro
+R$ 7.15 : Daniel
+R$ 7.15 : Alexandre
+R$ 7.15 : Gabriels
+
+PIX: 13582443752
+Data: 18/04/2024
+
+---------------------------------------
